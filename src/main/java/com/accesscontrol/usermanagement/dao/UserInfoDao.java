@@ -1,5 +1,7 @@
 package com.accesscontrol.usermanagement.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +19,14 @@ public class UserInfoDao {
 		try {
 			userInfoRepo.save(userInfo);
 			return "New User Info successfully added";
+		} catch (Exception e) {
+			throw new ServiceException(e.getMessage().substring(0, e.getMessage().length() > 150?150:e.getMessage().length()));
+		}
+	}
+
+	public List<UserInfo> getAllUserInfo() throws ServiceException {
+		try {
+			return userInfoRepo.findAll();
 		} catch (Exception e) {
 			throw new ServiceException(e.getMessage().substring(0, e.getMessage().length() > 150?150:e.getMessage().length()));
 		}
