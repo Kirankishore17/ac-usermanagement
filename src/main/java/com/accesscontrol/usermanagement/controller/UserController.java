@@ -16,8 +16,11 @@ import com.accesscontrol.usermanagement.exception.ServiceException;
 import com.accesscontrol.usermanagement.model.UserInfo;
 import com.accesscontrol.usermanagement.service.UserInfoService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @CrossOrigin(origins = "*/*")
+@Slf4j
 public class UserController {
 	
 	@Autowired
@@ -25,6 +28,7 @@ public class UserController {
 	
 	@GetMapping(path = "/home")
 	public String HomeController() {
+		log.info("Home/ping API called");
 		return "Home Page";
 	}
 
