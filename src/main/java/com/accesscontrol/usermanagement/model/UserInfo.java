@@ -40,12 +40,12 @@ public class UserInfo {
 	private String department;
 	@Column(name = "role")
 	private String role;
-	@Column(name = "created_at", nullable = false, updatable = false)
-	@CreationTimestamp
-	private LocalDateTime createdAt;
-	@Column(name = "updated_at", nullable = false, insertable = false)
-	@UpdateTimestamp
-	private LocalDateTime updatedAt;
+//	@Column(name = "created_at", nullable = false, updatable = false)
+//	@CreationTimestamp
+//	private LocalDateTime createdAt;
+//	@Column(name = "updated_at", nullable = false, insertable = false)
+//	@UpdateTimestamp
+//	private LocalDateTime updatedAt;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_login_info_id")
