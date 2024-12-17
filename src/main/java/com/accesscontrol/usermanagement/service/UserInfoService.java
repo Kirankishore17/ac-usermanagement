@@ -17,8 +17,9 @@ public class UserInfoService {
 	private UserInfoDao userInfoDao;
 
 	private String hashPassword(String password, String salt) throws ServiceException {
-		if (password != null && salt != null)
-		return String.join(password, salt);
+		if (password != null && salt != null) {
+			return password.concat(salt);
+		}
 		else
 			throw new ServiceException("Password/salt cannot be null");
 	}
@@ -27,6 +28,7 @@ public class UserInfoService {
 		UserLoginInfo loginInfo = new UserLoginInfo();
 		if (userInfo.getUserLoginInfo() != null) {
 			loginInfo.setPasswordHash(hashPassword(userInfo.getUserLoginInfo().getPasswordHash(), userInfo.getUserLoginInfo().getSalt()));
+			userInfo.getUserLoginInfo().setId(userInfo.getId());
 			return userInfoDao.saveUserInfo(userInfo);
 		} else {
 			throw new ServiceException("Password/salt cannot be null");
@@ -36,5 +38,9 @@ public class UserInfoService {
 
 	public List<UserInfo> getAllUserInfo() throws ServiceException {
 		return userInfoDao.getAllUserInfo();
+	}
+
+	public UserInfo getUserInfoById(Integer id) throws ServiceException {
+		return userInfoDao.getUserInfoById(id);
 	}
 }

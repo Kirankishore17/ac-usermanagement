@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,6 +47,14 @@ public class UserController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.CONTENT_TYPE, "application/json");
 		return new ResponseEntity<List>(userInfoList, headers, HttpStatus.OK);
+	}
+
+	@GetMapping(path = "/user/{id}")
+	public ResponseEntity<UserInfo> getUserInfoById(@PathVariable(name = "id") Integer id) throws ServiceException, Exception {
+		UserInfo userInfo = userInfoService.getUserInfoById(id);
+		HttpHeaders headers = new HttpHeaders();
+		headers.set(HttpHeaders.CONTENT_TYPE, "application/json");
+		return new ResponseEntity<UserInfo>(userInfo, headers, HttpStatus.OK);
 	}
 
 }

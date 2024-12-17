@@ -32,4 +32,12 @@ public class UserInfoDao {
 		}
 	}
 
+	public UserInfo getUserInfoById(Integer id) throws ServiceException {
+		try {
+			return userInfoRepo.getReferenceById(id);
+		} catch (Exception e) {
+			throw new ServiceException(e.getMessage().substring(0, e.getMessage().length() > 150?150:e.getMessage().length()));
+		}
+	}
+
 }
